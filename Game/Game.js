@@ -1,11 +1,4 @@
-//single line commet
-/*
-
-Mutltiple line commet
-
-*/
-
-//document.write("<h1>I can;t wait for <em> spring!</em> </h1>);
+document.write("<h1>I can;t wait for <em> spring!</em> </h1>");
 
 //alert("warning");
 
@@ -13,4 +6,6 @@ Mutltiple line commet
 
 //promt("what type of pokemon do you like?");
 
-var pc =prompt("what is your name?");
+var pc = prompt("what is your name?");   
+
+confirm("so your name is "+ pc "?");
