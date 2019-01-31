@@ -4,6 +4,7 @@ function Game(){
     document.write("Insomnic memories: a game by malachi barnard");
     var playername = prompt("White... everything is white.  Thats the first thing you see, and the only thing you remember is your name: ");
     alert("you look around the room. A bed and a door, thats all. also the memory burning in your head.  "+ playername);
+    var ironBar = false
     
     Maincell();
     
@@ -34,21 +35,47 @@ function Game(){
             alert("There a wall here");
             Maincell();
         }       
-        if(mainCell == "look at bed" || mainCellLook == "look at bed"){
-            var mainCellBed = prompt("The bed is a concrete slab.  There is straw instead of a blanket, and a pillow.  It's bolted to the ground, and there is a slight space under it.  \n -Back \n look").toLowerCase;
-        if (mainCellBed == "back"){
-            Maincell();
+        if(mainCell == "look at bed" || mainCellLook == "bed"){
+            var mainCellBed = prompt("The bed is a concrete slab.  There is straw instead of a blanket, and a pillow.  It's bolted to the ground, and there is a slight space under it.  \n -Back \n -look under bed").toLowerCase();
+            if (mainCellBed == "back"){
+                Maincell();
+            }
+            else if(mainCellBed == "look" || mainCellBed == "look under bed"){
+                var underBed = prompt("you look under the bed.  There are cobwebs.  Just cobwebs.  When you are about to give up and cry, you notice a shimmer out of the corner of your eye.  \n -look deeper \n -back ")
+                
+                if (underBed == "look deeper" || underBed == "look"){
+                    if (ironBar == false){
+                        alert("you start to reach your arm under the bed. and then the flashback happenes.\n \n You are on the ground, in a forest. gunshots are going off all around you, you can't tell where they are coming from because the trees block your path.  You see your commander, but you don't remember his name.  \n 'Soldier get up and fight.' \n you look down and see that you are holding a gun. As you look at your surroundings you see your platoon, all dead.  you realise that you are in real danger.  You decide to follow his orders, out of fear for your life.  You stand up but feel confused and dizzy. you see the commander start to shoot, but he gets hit.  He falls to the ground. \n the commander calls you over and with his last dying breath he says one thing, 'run.' ");
+                        alert("what just happened? This flashback floods you with sorrow.  You can't remember much, but you know that your platoon was your friends.  You need to know why you are here.  mabey your memorys will come back, but for now, you need to find out who took you")
+                    var takeChisel = prompt("you notice that the shiny thing under your bed is an iron bar, but its been made into a makeshift chisel.  You can probably use this. \n -take chisel ").toLowerCase();
+                        if(takeChisel == "take" || takeChisel == "take chisel"){
+                            ironbar == true
+                            Maincell();
+                        }
+                 }
+                }
+                else if (ironBar == false){
+                    alert('you have already taken the chisel, there is nothing left here')
+                    Maincell();
+                }
         }
-        }
+    }
         if (mainCell == "n" || mainCell == "move n"|| mainCellLook == "n" || mainCellLook == "move n" ){
-            var discoloredPatch = prompt("You move to the north of your tiny cell.  As you saw before, there is a discolored patch on the wall.  There is a small indentation running along the wall in the shape of a door. \n - Break patch \n - back \n -listen").toLowerCase;
-        }
-        if (discoloredPatch == "listen"){
-            alert("you place your ear against the patch, and listen.  You can barley hear some voices, you can't make out what they are saying but they sound festive");
-            mainCell();
-        }
-
-
-
+            Discoloredpatch();
+            function Discoloredpatch(){ 
+             var discoloredPatch = prompt("You move to the north of your tiny cell.  As you saw before, there is a discolored patch on the wall.  There is a small indentation running along the wall in the shape of a door. \n - Break patch \n - back \n - listen").toLowerCase();
+                if (discoloredPatch == "listen"){
+                    alert("you place your ear against the patch, and listen.  You can barley hear voices, you can't make out what they are saying but they †sound festive.  Who are your captors");
+                    Discoloredpatch();
+                }
+                else if(discoloredPatch == "break patch" && ironBar == false || discoloredPatch == "break" && ironBar == false){
+                    alert("how are you going to do that, pry it open with your fingers?");
+                    Maincell();
+                }   
+                else if(discoloredPatch == "back"){
+                    Maincell();
+                }
+            }
+    }
 }    
 }
