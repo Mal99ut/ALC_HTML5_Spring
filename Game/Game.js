@@ -1,131 +1,191 @@
-var inventory = {
-    chisel:0,
-    handgun:0,
-    c4:0,
-    ammo:0,
-    keycard:0,
-}
-var playerStats = {
-    health:100,
-    fatigue:0,
-    armor:0,
-}
-
 
 Game();
 
 function Game(){
+    var inventory = {
+        chisel:0,
+        handgun:0,
+        c4:0,
+        ammo:0,
+        keycard:0,
+    }
+    var playerStats = {
+        health:100,
+        fatigue:0,
+        armor:0,
+    }
     document.write("Insomnic memories: a game by malachi barnard");
+    alert("a few quick rules, if health = 0, you die.  If fatuige = 100, you have to restart, so be sure to check your stats at all times!")
     var playername = prompt("White... everything is white.  Thats the first thing you see, and the only thing you remember is your name: ");
     alert("you look around the room. A bed and a door, thats all. also the memory burning in your head.  "+ playername);
     
     Maincell();
     
     function Maincell(){
-        var mainCell = prompt("The room is empty.  The bed is bolted to the ground. The door has a slot, most likely to feed whoever is in here. You wonder why you are here. Faint voices seem to be heard from a distance, they seem to be speaking in russian. You notice a guard watching your every move at the door. Why do you need to be watched?   Basic commands: \n -look around (or) at, \n -break, \n -take \n- talk to guard \n - move (n,s,e,w), \n - go to sleep. you can find out the rest...").toLowerCase();
-        
-        if(mainCell == "look around" || mainCell == "look"){
-            var mainCellLook = prompt("the room is definition of blank, probably made of concrete, and by the looks of things, it's thick.  What is the reason for you being in here?  You notice on the north wall there is a slight miscoloration about the size of a door. The bed is low to the ground. The guard is watching you. What is wrong with you? you wonder if you are a criminal... \n -look at \n -move (n,s,e,w) \n -break, \n -talk to guard, \n -go to sleep, the rest is up to you...").toLowerCase();
-        
+        var mainCell = prompt("The room is empty.  The bed is bolted to the ground. The door has a slot, most likely to feed whoever is in here. You wonder why you are here. Faint voices seem to be heard from a distance, they seem to be speaking in russian. You notice a guard watching your every move at the door. Why do you need to be watched?   Basic commands: \n -look around (or) at \n -take \n - move (n,s,e,w) \n - go to sleep. \n- stats \nyou can find out the rest...").toLowerCase();
+        if (playerStats.health <= 0){
+            alert("you have died")
+        } 
+        else if(mainCell == "look around" || mainCell == "look"){
+            var mainCellLook = prompt("the room is definition of blank, probably made of concrete, and by the looks of things, it's thick.  What is the reason for you being in here?  You notice on the north wall there is a slight miscoloration about the size of a door. The bed is low to the ground. The guard is watching you. What is wrong with you? you wonder if you are a criminal... \n -look at \n -move (n,s,e,w) \n -break, \n -talk to guard, \n -go to sleep\n stats  \n the rest is up to you...").toLowerCase();
         }
-
-        
-        
-    else if(mainCell == "go to sleep" || mainCell == 'sleep'){
+        else if(mainCell == "go to sleep" || mainCell == 'sleep' || mainCellLook == "go to sleep" || mainCellLook == "sleep"){
         alert("as you go back to sleep on the uncomftorable bed, you notice a burning feeling in your head... then everything goes black");
-
-        
-        var resume = confirm("do you want to wake up?");
-        
-        if(resume){
-            Game();
+        Sleep();
         }
-        else{
-            alert("You don't wake up... ");
-        }
-        
-
-    }
-        if (mainCell == "w"|| mainCell == "move w" || mainCell == "e"|| mainCell == "move e"){
+        else if (mainCell == "w"|| mainCell == "move w" || mainCell == "e"|| mainCell == "move e"){
             alert("There a wall here");
             Maincell();
         }
-         if (mainCellLook == "w"|| mainCellLook == "move west" || mainCellLook == "e"|| mainCellLook == "move east"){
+        else if (mainCellLook == "w"|| mainCellLook == "move west" || mainCellLook == "e"|| mainCellLook == "move east"){
             alert("There a wall here");
             Maincell();
+        }
+        else if(mainCell == "look at bed"&& inventory.chisel<1 || mainCellLook == "bed"&& inventory.chisel<1|| mainCell == "bed"&& inventory.chisel<1|| mainCellLook == "look at bed"&& inventory.chisel<1){
+            Bed();
         }       
-        else if (mainCellLook == "s" || mainCellLook == "move s"){
-            var door = prompt('there is a door here.  It is big, around 4 meters in height and 3 in width.  Why is the door so big?  There is a window about one and a half meters up. \n -look \n -back \n - hit the dang door')
+        else if (mainCell == "n" || mainCell == "move n"|| mainCellLook == "n" || mainCellLook == "move n" ){
+            Discoloredpatch();
         }
+        else if(mainCell == "look at bed"&& inventory.chisel>= 1 || mainCellLook == "bed"&& inventory.chisel>= 1|| mainCell == "bed"&& inventory.chisel>= 1 || mainCellLook == "look at bed" && inventory.chisel>= 1){
+            alert('you have already taken the chisel, there is nothing left here');
+            Maincell();
+        }
+        else if(mainCell == "take" || mainCellLook == "take"){
+            alert("what is there to take?")
+            Maincell();
+        }
+        else if(mainCell == "move" || mainCellLook == "move"){
+            alert("to help yourself out, please place a letter (pretaining to the direction) after move")
+        }
+        else if(mainCell == "stats" || mainCellLook == "stats"){
+            alert("Health: " + playerStats.health + "\n Fatigue: " + playerStats.fatigue + "\n Armor: " + playerStats.armor);
+            Maincell();
+        }
+        else if(mainCell == "s" || mainCell == "move s" || mainCellLook == "move s" || mainCellLook == "s"){
+            Bigdoor();
+        }
+        
         else{
             alert("you can't do that");
             Maincell();
         }
-        if(mainCell == "look at bed" || mainCellLook == "bed"|| mainCell == "bed" || mainCellLook == "look at bed"){
-            var mainCellBed = prompt("The bed is a concrete slab.  There is straw instead of a blanket, and a pillow.  It's bolted to the ground, and there is a slight space under it.  \n -Back \n -look under bed").toLowerCase();
-            if (mainCellBed == "back"){
+    }
+        function Bed(){
+        var mainCellBed = prompt("The bed is a concrete slab.  There is straw instead of a blanket, and a pillow.  It's bolted to the ground, and there is a slight space under it.  \n -Back \n -look under bed").toLowerCase();
+        if (mainCellBed == "back"){
+            Maincell();
+        }
+        else if(mainCellBed == "look"|| mainCellBed == "look under bed") {
+            var underBed = prompt("you look under the bed.  There are cobwebs.  Just cobwebs.  When you are about to give up and cry, you notice a shimmer out of the corner of your eye.  \n -look deeper \n -back ")
+            if (underBed == "look deeper" || underBed == "look"){
+                    alert("you start to reach your arm under the bed. and then the flashback happenes.\n \n You are on the ground, in a forest. gunshots are going off all around you, you can't tell where they are coming from because the trees block your path.  You see your commander, but you don't remember his name.  \n 'Soldier get up and fight.' \n you look down and see that you are holding a gun. As you look at your surroundings you see your platoon, all dead.  you realise that you are in real danger.  You decide to follow his orders, out of fear for your life.  You stand up but feel confused and dizzy. you see the commander start to shoot, but he gets hit.  He falls to the ground. \n the commander calls you over and with his last dying breath he says one thing, 'run.' ");
+                    alert("what just happened? This flashback floods you with sorrow.  You can't remember much, but you know that your platoon was your friends.  You need to know why you are here.  mabey your memorys will come back, but for now, you need to find out who took you")
+                var takeChisel = prompt("you notice that the shiny thing under your bed is an iron bar, but its been made into a makeshift chisel. Someone has already been here? Could you possibly know them?  You can probably use this. \n -take chisel ").toLowerCase();
+                    if(takeChisel == "take" || takeChisel == "take chisel"){
+                        //Add one to the chisel
+                        inventory.chisel  ++;
+                        alert("you took the chisel");
+                        Maincell();
+                    }
+            }
+
+        }
+        else{
+            alert("you can't do that")
+            Maincell();
+        }
+        }
+        function Discoloredpatch(){ 
+            var discoloredPatch = prompt("You move to the north of your tiny cell.  As you saw before, there is a discolored patch on the wall.  There is a small indentation running along the wall in the shape of a door. \n - Break patch \n - back \n - listen \n -break with").toLowerCase();
+            if (discoloredPatch == "listen"){
+                alert("you place your ear against the patch, and listen.  You can barley hear voices, you can't make out what they are saying but they †sound festive.  Who are your captors");
+                Discoloredpatch();
+            }
+            else if(discoloredPatch == "back"){
                 Maincell();
             }
-            else if(mainCellBed == "look" || mainCellBed == "look under bed" && chisel < 1){
-                var underBed = prompt("you look under the bed.  There are cobwebs.  Just cobwebs.  When you are about to give up and cry, you notice a shimmer out of the corner of your eye.  \n -look deeper \n -back ")
-         
-                
-                if (underBed == "look deeper" || underBed == "look"){
-                    if (inventory.chisel < 1){
-                        alert("you start to reach your arm under the bed. and then the flashback happenes.\n \n You are on the ground, in a forest. gunshots are going off all around you, you can't tell where they are coming from because the trees block your path.  You see your commander, but you don't remember his name.  \n 'Soldier get up and fight.' \n you look down and see that you are holding a gun. As you look at your surroundings you see your platoon, all dead.  you realise that you are in real danger.  You decide to follow his orders, out of fear for your life.  You stand up but feel confused and dizzy. you see the commander start to shoot, but he gets hit.  He falls to the ground. \n the commander calls you over and with his last dying breath he says one thing, 'run.' ");
-                        alert("what just happened? This flashback floods you with sorrow.  You can't remember much, but you know that your platoon was your friends.  You need to know why you are here.  mabey your memorys will come back, but for now, you need to find out who took you")
-                    var takeChisel = prompt("you notice that the shiny thing under your bed is an iron bar, but its been made into a makeshift chisel. Someone has already been here? Could you possibly know them?  You can probably use this. \n -take chisel ").toLowerCase();
-                        if(takeChisel == "take" || takeChisel == "take chisel"){
-                            //Add one to the chisel
-                            inventory.chisel  ++;
-                            alert("you took the chisel");
-                            Maincell();
-                        }
-                        else{
-                            alert("you can't do that");
-                            Maincell();
-                        }
-                 }
-                }
-                if (underBed == "look deeper" && inventory.chisel >= 1 || underBed == "look" && inventory.chisel >= 1){
-                    alert('you have already taken the chisel, there is nothing left here');
-                    Maincell();
-                }
-                else{
-                    alert("you can't do that");
-                    Maincell();
-                }
+            else if(discoloredPatch == "break patch with chisel" && inventory.chisel >= 1 || discoloredPatch == "break with chisel" && inventory.chisel >= 1 || discoloredPatch == "chisel" && inventory.chisel >= 1 || discoloredPatch == "break" && inventory.chisel>= 1 || discoloredPatch == "break patch" && inventory.chisel>=1 ){
+                Guardhouse();
+            }
+            else if(discoloredPatch == "break" && inventory.chisel< 1 || discoloredPatch == "break patch" && inventory.chisel<1 ){
+                var attemptBreak = ["you try to headbutt it, wow that hurt\n health -5", "you run at the area and plow with your shoulder, bad idea\n health -5", "you try to kick it, painful\n health -5"]
+                alert(attemptBreak[Math.floor(Math.random()*3)])
+                playerStats.health -= 5
+                playerStats.fatigue += 2
+                Discoloredpatch();
+            }
+            else if (playerStats.health <= 0){
+                alert("you have died")
+            } 
+            else if(discoloredPatch == "stats"){
+                alert("Health: " + playerStats.health + "\n Fatigue: " + playerStats.fatigue + "\n Armor: " + playerStats.armor);
+                Discoloredpatch();
+            }
+            else{
+                alert("you can't do that");
+                Discoloredpatch();
+            }                   
+            function Guardhouse(){
+                    alert("this is a test");
         }
-    }
-        if (mainCell == "n" || mainCell == "move n"|| mainCellLook == "n" || mainCellLook == "move n" ){
-            Discoloredpatch();
-            function Discoloredpatch(){ 
-             var discoloredPatch = prompt("You move to the north of your tiny cell.  As you saw before, there is a discolored patch on the wall.  There is a small indentation running along the wall in the shape of a door. \n - Break patch \n - back \n - listen \n -break with").toLowerCase();
-                if (discoloredPatch == "listen"){
-                    alert("you place your ear against the patch, and listen.  You can barley hear voices, you can't make out what they are saying but they †sound festive.  Who are your captors");
-                    Discoloredpatch();
+        }
+             
+            function Sleep(){        
+            var resume = confirm("do you want to wake up?");
+            
+            if(resume){
+                Game();
+            }
+            else{
+                alert("You don't wake up... ");
+            }  
+        }
+        function Bigdoor(){
+            var southDoor = prompt("There is a big iron door, about two meters in width and six in heigth.  There is a guard with an emotionless face... watching you.  \nCommands: \n-talk to guard \n -hit door \n -back \n -stats").toLocaleLowerCase();
+            if (southDoor == "stats"){
+                alert("Health: " + playerStats.health + "\n Fatigue: " + playerStats.fatigue + "\n Armor: " + playerStats.armor);
+                Bigdoor();
+            }
+            else if(southDoor == 'talk to guard' || southDoor == "talk"){
+                var smallTalk = ["you say hello, the guard dosen't respond","you ask who you are, the guard dosen't respond","you ask where you are, the guard dosen't respond","you ask for food, the guard dosen't respond","you beg for food, the guard dosen't respond", "you yell at the guard, the guard dosen't respond", "You try to use sign language at the guard, the guard dosen't respond", "you quote winston churchill's talk on never giving up, the guard dosen't respond", "you tell the guard a dad joke, the guard dosen't respond", "you tell the guard how this line of code is probably the longest in the game, the guard dosen't respond","You tell the guard he's mean, the guard dosen't respond","you tell the guard he looks like he looks like a furry, he looks offended", "You flop onto the ground and start loudly screaming and moaning. The guard looks inside and smugly smiles, then goes back to his business.","you yell at the guard 'Hey look at me!', the guard looks over, you say 'try me'","at this point the guard is playing roblox on his iphone 5s"]
+                    alert(smallTalk[Math.floor(Math.random()*15)])
+                    playerStats.fatigue += 2
+                    Bigdoor(); 
                 }
-                else if(discoloredPatch == "back"){
-                    Maincell();
-                }
-                else if(discoloredPatch == "break patch with chisel" && inventory.chisel >= 1 || discoloredPatch == "break with chisel" && inventory.chisel >= 1 || discoloredPatch == "chisel" && inventory.chisel >= 1 ){
-                    Guardhouse();
-                }                    
-                else{
-                    alert("you cant do that");
-                    Maincell();
-                    }
-                function Guardhouse(){
-                        alert("this is a test");
-                                    
-                    }
+            else if(southDoor == "back"){
+                Maincell();
+            }
+            else if(southDoor == "hit door" || southDoor == "hit"){
+                var hitDoor =["you hit the door with your head, ouch... the guard laughs \n health -5 \n fatigue -5","You hit the door with your fist, that was a stupid idea... the guard mocks you \n health -5 \n fatigue -5","You try to kick the door. With your bare feet... oops \n health -5 \n fatigue -5"];
+                alert(hitDoor[Math.floor(Math.random()*3)])
+                playerStats.health -= 5
+                playerStats.fatigue += 5
+                Bigdoor();
             }
 
-        }
-        else{
-            alert("you can't do that");
-            Maincell();
-        }
-}    
+            else if(playerStats.fatigue >= 100 || playerStats.health <= 0){
+                alert("You have died");
+                var doorDeath = confirm("play again?");
+                    if(doorDeath){
+                        Game();
+                    }
+                    else{
+                        alert("you'll never find out why you were here")
+                    }
+            }            
+            else if(playerStats.fatigue == 20){
+                alert("you are getting pretty tired, remeber, don't get to 100 with fatuige");
+                Bigdoor();
 
-}
+            }
+            else{
+                alert("you can't do that");
+                Bigdoor();
+            }
+        }    
+    }
+
+
+
+
