@@ -22,14 +22,11 @@ function Game(){
     Maincell();
     
     function Maincell(){
-        var mainCell = prompt("The room is empty.  The bed is bolted to the ground. The door has a slot, most likely to feed whoever is in here. You wonder why you are here. Faint voices seem to be heard from a distance, they seem to be speaking in russian. You notice a guard watching your every move at the door. Why do you need to be watched?   Basic commands: \n -look around (or) at \n -take \n - move (n,s,e,w) \n - go to sleep. \n- stats \nyou can find out the rest...").toLowerCase();
+        var mainCell = prompt("The room is empty.  The bed is bolted to the ground. The door has a slot, most likely to feed whoever is in here. You wonder why you are here. Faint voices seem to be heard from a distance, they seem to be speaking in russian. You notice a guard watching your every move at the door. Why do you need to be watched?   \n Basic commands \n -take \n -move (n,s,e,w) \n -go to sleep. \n -stats \n -bed \nyou can find out the rest...").toLowerCase();
         if (playerStats.health <= 0){
             alert("you have died")
         } 
-        else if(mainCell == "look around" || mainCell == "look"){
-            var mainCellLook = prompt("the room is definition of blank, probably made of concrete, and by the looks of things, it's thick.  What is the reason for you being in here?  You notice on the north wall there is a slight miscoloration about the size of a door. The bed is low to the ground. The guard is watching you. What is wrong with you? you wonder if you are a criminal... \n -look at \n -move (n,s,e,w) \n -break, \n -talk to guard, \n -go to sleep\n stats  \n the rest is up to you...").toLowerCase();
-        }
-        else if(mainCell == "go to sleep" || mainCell == 'sleep' || mainCellLook == "go to sleep" || mainCellLook == "sleep"){
+        else if(mainCell == "go to sleep" || mainCell == 'sleep' ){
         alert("as you go back to sleep on the uncomftorable bed, you notice a burning feeling in your head... then everything goes black");
         Sleep();
         }
@@ -37,32 +34,29 @@ function Game(){
             alert("There a wall here");
             Maincell();
         }
-        else if (mainCellLook == "w"|| mainCellLook == "move west" || mainCellLook == "e"|| mainCellLook == "move east"){
-            alert("There a wall here");
-            Maincell();
-        }
-        else if(mainCell == "look at bed"&& inventory.chisel<1 || mainCellLook == "bed"&& inventory.chisel<1|| mainCell == "bed"&& inventory.chisel<1|| mainCellLook == "look at bed"&& inventory.chisel<1){
+        else if(mainCell == "look at bed"&& inventory.chisel<1 || mainCell == "bed"&& inventory.chisel<1){
             Bed();
         }       
-        else if (mainCell == "n" || mainCell == "move n"|| mainCellLook == "n" || mainCellLook == "move n" ){
+        else if (mainCell == "n" || mainCell == "move n"){
             Discoloredpatch();
         }
-        else if(mainCell == "look at bed"&& inventory.chisel>= 1 || mainCellLook == "bed"&& inventory.chisel>= 1|| mainCell == "bed"&& inventory.chisel>= 1 || mainCellLook == "look at bed" && inventory.chisel>= 1){
+        else if(mainCell == "look at bed"&& inventory.chisel>= 1 || mainCell == "bed"&& inventory.chisel>= 1){
             alert('you have already taken the chisel, there is nothing left here');
             Maincell();
         }
-        else if(mainCell == "take" || mainCellLook == "take"){
+        else if(mainCell == "take"){
             alert("what is there to take?")
             Maincell();
         }
-        else if(mainCell == "move" || mainCellLook == "move"){
-            alert("to help yourself out, please place a letter (pretaining to the direction) after move")
+        else if(mainCell == "move"){
+            alert("to help yourself out, please place a letter (pretaining to the direction) after move");
+            Maincell();
         }
-        else if(mainCell == "stats" || mainCellLook == "stats"){
+        else if(mainCell == "stats"){
             alert("Health: " + playerStats.health + "\n Fatigue: " + playerStats.fatigue + "\n Armor: " + playerStats.armor);
             Maincell();
         }
-        else if(mainCell == "s" || mainCell == "move s" || mainCellLook == "move s" || mainCellLook == "s"){
+        else if(mainCell == "s" || mainCell == "move s"){
             Bigdoor();
         }
         
@@ -89,7 +83,16 @@ function Game(){
                         Maincell();
                     }
             }
-
+            else if(underBed == "commit die"){
+                alert("† you commit heart no pump †");
+                hnp = confirm("play again?")
+                    if(hnp){
+                        Game();
+                    }
+                    else{
+                        alert("oof death")
+                    }
+            }
         }
         else{
             alert("you can't do that")
@@ -148,7 +151,7 @@ function Game(){
                 Bigdoor();
             }
             else if(southDoor == 'talk to guard' || southDoor == "talk"){
-                var smallTalk = ["you say hello, the guard dosen't respond","you ask who you are, the guard dosen't respond","you ask where you are, the guard dosen't respond","you ask for food, the guard dosen't respond","you beg for food, the guard dosen't respond", "you yell at the guard, the guard dosen't respond", "You try to use sign language at the guard, the guard dosen't respond", "you quote winston churchill's talk on never giving up, the guard dosen't respond", "you tell the guard a dad joke, the guard dosen't respond", "you tell the guard how this line of code is probably the longest in the game, the guard dosen't respond","You tell the guard he's mean, the guard dosen't respond","you tell the guard he looks like he looks like a furry, he looks offended", "You flop onto the ground and start loudly screaming and moaning. The guard looks inside and smugly smiles, then goes back to his business.","you yell at the guard 'Hey look at me!', the guard looks over, you say 'try me'","at this point the guard is playing roblox on his iphone 5s"]
+                var smallTalk = ["you say hello, the guard dosen't respond","you ask who you are, the guard dosen't respond","you ask where you are, the guard dosen't respond","you ask for food, the guard dosen't respond","you beg for food, the guard dosen't respond", "you yell at the guard, the guard dosen't respond", "You try to use sign language at the guard, the guard dosen't respond", "you quote winston churchill's talk on never giving up, the guard dosen't respond", "you tell the guard a dad joke, the guard dosen't respond", "you tell the guard how this line of code is probably the longest in the game, the guard dosen't respond","You tell the guard he's mean, the guard dosen't respond","you tell the guard he looks like he looks like he's single, he looks offended", "You flop onto the ground and start loudly screaming and moaning. The guard looks inside and smugly smiles, then goes back to his business.","you yell at the guard 'Hey look at me!', the guard looks over, you say 'try me'","at this point the guard is playing roblox on his iphone 5s"]
                     alert(smallTalk[Math.floor(Math.random()*15)])
                     playerStats.fatigue += 2
                     Bigdoor(); 
