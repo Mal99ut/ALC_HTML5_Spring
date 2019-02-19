@@ -8,6 +8,10 @@ function Game(){
         c4:0,
         ammo:0,
         keycard:0,
+        straw:0,
+        chestplate:0,
+        kevlar:0,
+        ironSuit:0,
     }
     var playerStats = {
         health:100,
@@ -18,11 +22,37 @@ function Game(){
     alert("a few quick rules, if health = 0, you die.  If fatuige = 100, you have to restart, so be sure to check your stats at all times!")
     var playername = prompt("White... everything is white.  Thats the first thing you see, and the only thing you remember is your name: ");
     alert("you look around the room. A bed and a door, thats all. also the memory burning in your head.  "+ playername);
+    var checkStats = function(){
+        alert("Health: " + playerStats.health + "\n Fatigue: " + playerStats.fatigue + "\narmor: " + playerStats.armor);
+    }
+    var checkArmor = function(){
+        alert("straw armor: " + inventory.straw + "\nchestplate: " + inventory.chestplate + "\nkevlar: " + inventory.kevlar + "\niron suit: " + inventory.ironSuit )
+    }
+    var checkArmortoDamage = function(){
+        if (playerStats.armor <5){
+            playerStats.health = playerStats.health;
+        }
+        else if(playerStats.armor >= 5 && playerStats.armor <= 10){
+            playerStats.health += 2
+        }
+        else if(playerStats.armor >10 && playerStats.armor <= 20){
+            playerStats.health += 8
+            playerStats.fatigue += 4
+        }
+        else if(playerStats.armor > 20 && playerStats.armor <= 50){
+            playerStats.health += 14
+            playerStats.fatigue += 8
+        }
+        else if(playerStats.armor > 50 && playerStats.armor <= 100){
+            playerStats.health += 28
+            playerStats.fatigue += 16
+        }
+    }
     
     Maincell();
     
     function Maincell(){
-        var mainCell = prompt("The room is empty.  The bed is bolted to the ground. The door has a slot, most likely to feed whoever is in here. You wonder why you are here. Faint voices seem to be heard from a distance, they seem to be speaking in russian. You notice a guard watching your every move at the door. Why do you need to be watched?   \n Basic commands \n -take \n -move (n,s,e,w) \n -go to sleep. \n -stats \n -bed \nyou can find out the rest...").toLowerCase();
+        var mainCell = prompt("The room is empty.  The bed is bolted to the ground. The door has a slot, most likely to feed whoever is in here. You wonder why you are here. Faint voices seem to be heard from a distance, they seem to be speaking in russian. You notice a guard watching your every move at the door. Why do you need to be watched?   \n Basic commands \n -take \n -move (n,s,e,w) \n -go to sleep. \n -stats \n -bed \n -armor \nyou can find out the rest...").toLowerCase();
         if (playerStats.health <= 0){
             alert("you have died")
         } 
@@ -53,11 +83,15 @@ function Game(){
             Maincell();
         }
         else if(mainCell == "stats"){
-            alert("Health: " + playerStats.health + "\n Fatigue: " + playerStats.fatigue + "\n Armor: " + playerStats.armor);
+            checkStats(); 
             Maincell();
         }
         else if(mainCell == "s" || mainCell == "move s"){
             Bigdoor();
+        }
+        else if(mainCell == "armor"){
+            checkArmor();
+            Maincell();
         }
         
         else{
@@ -66,7 +100,7 @@ function Game(){
         }
     }
         function Bed(){
-        var mainCellBed = prompt("The bed is a concrete slab.  There is straw instead of a blanket, and a pillow.  It's bolted to the ground, and there is a slight space under it.  \n -Back \n -look under bed").toLowerCase();
+        var mainCellBed = prompt("The bed is a concrete slab.  There is straw instead of a blanket, and a pillow.  It's bolted to the ground, and there is a slight space under it.  \n -Back \n -look under bed \n -take \n armor ").toLowerCase();
         if (mainCellBed == "back"){
             Maincell();
         }
@@ -82,7 +116,11 @@ function Game(){
                         alert("you took the chisel");
                         Maincell();
                     }
+                    else{
+                        Bed();
+                    }
             }
+        }
             else if(underBed == "commit die"){
                 alert("† you commit heart no pump †");
                 hnp = confirm("play again?")
@@ -93,11 +131,32 @@ function Game(){
                         alert("oof death")
                     }
             }
-        }
-        else{
-            alert("you can't do that")
-            Maincell();
-        }
+            else if(mainCellBed == "take straw" && inventory.straw < 1){
+                alert("you take the straw and stuff it into your shirt and pants, unconftorable but adds some padding");
+                inventory.straw += 1
+                playerStats.armor += 5
+                Bed();
+            }
+            else if(mainCellBed == "take straw" && invenotry.straw >= 1){
+                alert("you took the straw already, you'll just be cold when you sleep in exchange for armor");
+            } 
+            else if (mainCellBed == "take"){
+                alert("please take something relevant and not just the air for your lungs");
+                Bed();
+            }
+            else if(mainCellBed == "back"){
+                Maincell();
+            }
+            else if(mainCellBed == "stats"){
+                checkStats();
+                Bed();
+            }
+
+        
+            else{
+                alert("you can't do that")
+                Bed();
+            }
         }
         function Discoloredpatch(){ 
             var discoloredPatch = prompt("You move to the north of your tiny cell.  As you saw before, there is a discolored patch on the wall.  There is a small indentation running along the wall in the shape of a door. \n - Break patch \n - back \n - listen \n -break with").toLowerCase();
@@ -116,6 +175,7 @@ function Game(){
                 alert(attemptBreak[Math.floor(Math.random()*3)])
                 playerStats.health -= 5
                 playerStats.fatigue += 2
+                checkArmortoDamage();
                 Discoloredpatch();
             }
             else if (playerStats.health <= 0){
@@ -164,6 +224,7 @@ function Game(){
                 alert(hitDoor[Math.floor(Math.random()*3)])
                 playerStats.health -= 5
                 playerStats.fatigue += 5
+                checkArmortoDamage();
                 Bigdoor();
             }
 
