@@ -6,6 +6,7 @@ function Game(){
         chisel:0,
         handgun:0,
         c4:0,
+        knife:0,
         ammo:0,
         keycard:0,
         straw:0,
@@ -137,8 +138,9 @@ function Game(){
                 playerStats.armor += 5
                 Bed();
             }
-            else if(mainCellBed == "take straw" && invenotry.straw >= 1){
+            else if(mainCellBed == "take straw" && inventory.straw >= 1){
                 alert("you took the straw already, you'll just be cold when you sleep in exchange for armor");
+                Bed();
             } 
             else if (mainCellBed == "take"){
                 alert("please take something relevant and not just the air for your lungs");
@@ -168,7 +170,7 @@ function Game(){
                 Maincell();
             }
             else if(discoloredPatch == "break patch with chisel" && inventory.chisel >= 1 || discoloredPatch == "break with chisel" && inventory.chisel >= 1 || discoloredPatch == "chisel" && inventory.chisel >= 1 || discoloredPatch == "break" && inventory.chisel>= 1 || discoloredPatch == "break patch" && inventory.chisel>=1 ){
-                Guardhouse();
+                GuardhouseCloset();
             }
             else if(discoloredPatch == "break" && inventory.chisel< 1 || discoloredPatch == "break patch" && inventory.chisel<1 ){
                 var attemptBreak = ["you try to headbutt it, wow that hurt\n health -5", "you run at the area and plow with your shoulder, bad idea\n health -5", "you try to kick it, painful\n health -5"]
@@ -189,9 +191,7 @@ function Game(){
                 alert("you can't do that");
                 Discoloredpatch();
             }                   
-            function Guardhouse(){
-                    alert("this is a test");
-        }
+
         }
              
             function Sleep(){        
@@ -248,8 +248,36 @@ function Game(){
                 Bigdoor();
             }
         }    
-    }
+        function GuardhouseCloset(){
+        var guardCloset = prompt("The patch swings open, it turns out this is an abandoned service hatch, which means this cell was probably repurposed.  There are cleaning supplies in here, a broom, a janitors cart and some bleach.  There is a door leading to the another room, which is quiet. \n n\n s \n take \n look at ").toLowerCase();
 
+        if(guardCloset == "look at janitors cart"){
+            var janitorsCart = prompt("The cart is dirty, there is not much on it, just some rags and spray \n back \n move (object) ").toLowerCase();
 
+            if(janitorsCart == "move rags" && inventory.knife < 1){
+                var moveRags = confirm("you move the rags, and find a small pocket knife... it can be good.  Take it?")
+            }
+                if (moveRags){
+                    alert("you take the knife");
+                    inventory.knife += 1
+                    GuardhouseCloset();
+                }
+            else{
+                GuardhouseCloset();
+            }
+            if(guardCloset == "s"){
+                discoloredPatch();
+            }
+            else if(guardCloset == "n"){
+                alert("you can't go there cause we are in beta right now");
+                GuardhouseCloset();
+            }
+            else{
+                alert("you cant do that");
+                GuardhouseCloset();
+            }
+        }
+                  }
+                }  
 
 
