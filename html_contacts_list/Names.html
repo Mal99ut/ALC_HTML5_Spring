@@ -1,31 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <meta htpp-equiv="X-UA-Compatible" content="ie=edge">
+        
+        <link rel="stylesheet"
+            href ="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.css">
+        
+        <title>contacts list</title>
+    </head>
+    <body>
+     <div class="container">
+        <h1 class = "center-align">
+         The contacts
+         </h1>
+         <input type = "text" id = "filterInput" placeholder="come on and search already.......">
+         
+         <ul id ="names" class="collection with-header">
+          <li class = "collection-header">
+          <h5>A</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Andromina</a>   
+          </li>
+          <li class = "collection-header">
+          <h5>B</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Benidiktas</a>   
+          </li>            
+          <li class = "collection-header">
+          <h5>C</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Cyigebert</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>D</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Dixon</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>E</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Egnatius</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>F</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Franciscus</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>G</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Goda</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>H</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Hengist</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>I</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Ingrid</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>J</h5>
+          </li>
+          <li class = "collection item">
+          <a href="#">Jayendra</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>K</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Karthikeyan</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>L</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Leopald</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>M</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Màedòc</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>N</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Nillani</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>O</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Odalric</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>P</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Parvati</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>Q</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Quirinus</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>R</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Raiden</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>S</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Syneherd</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>T</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Thucydides</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>U</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Unbourn</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>V</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Viator</a>   
+          </li>
+          <li class = "collection-header">
+          <h5>W</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Wii boxer</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>X</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Xane</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>Y</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Yyvitri</a>   
+          </li>             
+          <li class = "collection-header">
+          <h5>Z</h5>   
+          </li>
+          <li class = "collection item">
+          <a href="#">Zakch</a>   
+          </li>             
+         </ul>
+        </div>
+        <script>
+        // Get input element
+        let filterInput = document.getElementById('filterInput')
+        //add event listener
+        filterInput.addEventListener('keyup',filterNames);
+        
+        function filterNames(){
+        //get value of input
+        let filterValue = document.getElementById('filterInput').value.toUpperCase();
+            
+        // Get the ul names
+        let ul = document.getElementById('names');
+        //get list from ul
+        let li = ul.querySelectorAll('li.collection-item');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //loop through the collection from list
+        for(let i = 0;i<li.length;i++){
+            let a = li[i].getElementsByTagName('A')[0];
+            //IF matched
+            if(a.innerHTML.toUpperCase().indexOf(filterValue) > -1){
+                li[i].style.display = '';
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+        }
+        </script>
+    </body>
 </html>
