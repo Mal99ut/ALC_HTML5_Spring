@@ -183,25 +183,25 @@
         filterInput.addEventListener('keyup',filterNames);
         
         function filterNames(){
-        //get value of input
-        let filterValue = document.getElementById('filterInput').value.toUpperCase();
-            
-        // Get the ul names
-        let ul = document.getElementById('names');
-        //get list from ul
-        let li = ul.querySelectorAll('li.collection-item');
+            //get value of input
+            let filterValue = document.getElementById('filterInput').value.toUpperCase();
+                
+            // Get the ul names
+            let ul = document.getElementById('names');
+            //get list from ul
+            let li = ul.querySelectorAll('li.collection-item');
 
-        //loop through the collection from list
-        for(let i = 0;i<li.length;i++){
-            let a = li[i].getElementsByTagName('A')[0];
-            //IF matched
-            if(a.innerHTML.toUpperCase().indexOf(filterValue) > -1){
-                li[i].style.display = '';
-            } else {
-                li[i].style.display = "none";
-            }
+            //loop through the collection from list
+            for(let i = 0;i<li.length;i++){
+                let a = li[i].getElementsByTagName('a')[0];
+                //IF matched
+                if(a.innerHTML.toUpperCase().indexOf(filterValue) > -1){
+                    li[i].style.display = '';
+                } else {
+                    li[i].style.display = "none";
+                }
         }
-        }
+     }
         </script>
     </body>
 </html>
