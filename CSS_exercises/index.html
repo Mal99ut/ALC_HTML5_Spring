@@ -22,23 +22,72 @@
             margin:0 0 200px 108px;
 
         }
+    
+
         div#box{
             background-color:sienna;
             width: 250px;
             height: 250px;
             position: absolute;
             left:500px;
-            top:500px
+            top:500px;
+            transition:5s;
         }
+        div#triangle{ 
+            width: 0; 
+            height: 0; 
+            left: 600px;
+            top: 600px;
+            position: absolute;
+            border-left: 300px solid transparent; 
+            border-right: 300px solid transparent; 
+            border-bottom: 300px solid goldenrod;
+            transition:5s;
+            }
+    
         div#circle{
             background-color: burlywood;
             width: 250px;
             height: 250px;
-            border-radius: 100px;
+            border-radius: 250px;
             position: absolute;
             left: 500px;
             top: 500px;
+            transition:5s;
         }
+        img#GOAT{
+            display:block;
+            width:250px;
+            height:200px;
+            position:absolute;
+            top:500px;
+            left:500px;
+            border:outset 5px, ivory;
+            border-radius: 15px;
+            box-shadow: 10px 10px 20px black;
+
+        }
+         div#circle:hover{
+            width: 250px;
+            height: 250px;
+            border-radius: 0px;
+
+        } 
+        div#box:hover{
+            width: 350px;
+            height: 350px;
+            border-radius: 350px;
+        }
+        div#triangle:hover{
+            width:100px;
+            height: 100px;
+            border-left: 100px solid goldenrod;
+            border-right: 100px solid goldenrod;
+            border-top: 100px solid goldenrod;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -46,5 +95,8 @@
     <h3>VOL_MAX</h3>
     <div id = "box"></div>
     <div id = "circle"></div>
+    <div id = triangle></div>
+    <img src = "Telemarketer.jpg" id = GOAT>
+
 </body>
 </html>
