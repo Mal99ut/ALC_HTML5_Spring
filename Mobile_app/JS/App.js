@@ -1,0 +1,1 @@
+// this is the code/app portion of this project, script for mobile app \\
