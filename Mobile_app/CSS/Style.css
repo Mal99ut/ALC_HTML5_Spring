@@ -15,8 +15,7 @@ body{
 }
 
 div#container{
-    width:1200px;
-    height:800px;
+    width:100%;
     border:3px solid rgb(255, 230, 193);
     background-color: rgb(255, 255, 255);
 }
@@ -24,6 +23,16 @@ header{
     width:91.5%;
     padding:50px;
     background-color: rgb(255, 255, 255);
+}
+img#logo{
+    display:block;
+    margin:auto;
+    width:15%;
+}
+img#newProducts{
+    display:block;
+    margin:auto;
+    width:25%;
 }
 header h1{
     color: rgb(0, 0, 0);
@@ -34,15 +43,19 @@ div#content{
     width:100%;
     background-color: rgb(255, 230, 193);
     font-size: 2em;
+    border:2px,solid, rgb(255,230,193)
 }
 nav{
     background-color: rgb(255, 207, 50);
 }
 nav ul{
+    width:25%;
+    margin:auto;
     list-style: none;
 }
-nav ul li{
+nav ul li a{
     float:left;
+    display: block;
     padding:5px 15px;
     background-color:rgb(255, 215, 86);
     border-right: 2px inset white;
@@ -56,10 +69,23 @@ nav ul li a:hover{
 }
 
 footer{
+    position: absolute;
     width: 100%;
-    height:25px;
+    height:50px;
+    bottom:0;
+    left:0;
     background-color: rgb(255, 230, 193);
 }
 div.keepOpen{
     clear: both;
+}
+
+@media screen and (max-width:600px) {
+    div#container{
+        width: 100%;
+    }
+    nav ul li a{
+        float:none;
+        text-align:center;
+    }
 }
