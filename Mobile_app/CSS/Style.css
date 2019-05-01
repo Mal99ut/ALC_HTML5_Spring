@@ -10,13 +10,14 @@ html,body,div,p,ul,ol,li,h1,h2,h3,h4,h5,h6
 }
 
 body{
-    background-color: rgb(255, 255, 255);
+    background-color: rgb((255, 230, 193));
     font-family: "Arial"
 }
 
 div#container{
     width:100%;
-    border:3px solid rgb(255, 230, 193);
+    border-top:3px solid rgb(255, 230, 193);
+    border-bottom:3px solid rgb(255, 230, 193);
     background-color: rgb(255, 255, 255);
 }
 header{
@@ -35,21 +36,48 @@ img#newProducts{
     width:25%;
 }
 header h1{
-    color: rgb(0, 0, 0);
+    text-align:center;
+    color: white;
     font-family: 'Open Sans', sans-serif;
     font-size: 5em;
 }
 div#content{
+    text-align: center;
     width:100%;
     background-color: rgb(255, 230, 193);
     font-size: 2em;
     border:2px,solid, rgb(255,230,193)
 }
-nav{
+.icon-bar{
+    position: fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background-color:rgb(255,230,193);
+    overflow:auto;
+}
+.icon-bar a {
+    float:left;
+    width:20%;
+    text-align: center;
+    padding: 12px 0;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 36px;
+}
+.icon-bar a:hover{
+    background-color: white;
+    color:rgb(255,230,193);
+}
+.active{
+    background-color: rgb(245,220,183);
+    color:rgb(245,245,245);
+}
+/* nav{
     background-color: rgb(255, 207, 50);
 }
 nav ul{
-    width:25%;
+    width:21%;
     margin:auto;
     list-style: none;
 }
@@ -60,6 +88,7 @@ nav ul li a{
     background-color:rgb(255, 215, 86);
     border-right: 2px inset white;
 }
+
 nav a{
     text-decoration:none;
     color: black;
@@ -75,8 +104,8 @@ footer{
     bottom:0;
     left:0;
     background-color: rgb(255, 230, 193);
-}
-div.keepOpen{
+} */
+/* div.keepOpen{
     clear: both;
 }
 
@@ -88,4 +117,4 @@ div.keepOpen{
         float:none;
         text-align:center;
     }
-}
+} */
