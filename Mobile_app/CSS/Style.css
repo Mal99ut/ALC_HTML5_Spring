@@ -119,3 +119,42 @@ footer{
         text-align:center;
     }
 } */
+div#product_grp{
+    width:50%;
+    margin:auto;
+}
+figure.product{
+    transition:1s;
+    background-color:white;
+    width:100%;
+    float:left;
+    margin: 10px;
+    border:2px antiquewhite;
+}
+
+figure.product img{
+    width:25%;
+
+}
+
+figure.product figcaption{
+    transition:1s;
+    color:black;
+    font-family:sans-serif;
+    font-size:20px;
+
+}
+
+.keepOpen{
+    clear:both;
+}
+figure.product:hover{
+    transition:1s;
+    width:105%;
+    float:auto;
+    background-color: rgb(245,245,245);
+}
+figure.product:hover figcaption{
+    transition:1s;
+    color:rgb(10,10,10);
+}
