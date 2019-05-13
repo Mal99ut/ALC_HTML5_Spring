@@ -158,3 +158,11 @@ figure.product:hover figcaption{
     transition:1s;
     color:rgb(10,10,10);
 }
+figure.product:hover img{
+    transition:1s;
+    background-color:rgb(245,245,245);
+}
+div.space{
+    margin-top:1000px;
+
+}
