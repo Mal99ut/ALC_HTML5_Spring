@@ -166,3 +166,25 @@ div.space{
     margin-top:1000px;
 
 }
+div#matenince{
+    margin:auto;
+    width:25%;
+}
+figure.matenince_pages {
+    widows: 25%;
+}
+figure.matenince_pages img{
+    margin:auto;
+    float:left;
+    width:10%;
+}
+div#home{
+    margin:auto;
+    width:100%;
+}
+figure.home_page{
+    margin:auto;
+    width:100%;
+    font-size:400%;
+    color:rgb(255, 211, 145);
+}
